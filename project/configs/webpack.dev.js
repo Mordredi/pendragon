@@ -13,8 +13,8 @@ module.exports = Merge(commonConfig, {
       'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
-      require.resolve('./src/polyfills'),
-      './src/index.dev.jsx',
+      require.resolve('../src/polyfills'),
+      path.resolve(__dirname, '../src/index.dev.jsx'),
     ]
   },
   output: {
@@ -52,7 +52,7 @@ module.exports = Merge(commonConfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: path.resolve(__dirname, '../src/index.html'),
       inject: 'body',
       chunksSortMode(left, right) {
         const leftIndex = entryPoints.indexOf(left.names[0]);

@@ -14,8 +14,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = Merge(commonConfig, {
   entry: {
     main: [
-      require.resolve('./src/polyfills'),
-      './src/index.jsx',
+      require.resolve('../src/polyfills'),
+      path.resolve(__dirname, '../src/index.jsx'),
     ]
   },
   resolve: {

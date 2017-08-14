@@ -9,16 +9,16 @@
     "prop-types": "^15.5.10",
     "react": "next",
     "react-dom": "next",
-    "react-router-dom": "next",
+    "react-router-dom": "^4.1.0",
     "spdy": "^3.4.7",
     "webpack": "^3.0.0",
     "whatwg-fetch": "^2.0.3"
   },
   "scripts": {
-    "start": "webpack-dev-server --env=dev",
-    "stats": "webpack --env=stats --display-optimization-bailout",
+    "start": "webpack-dev-server --config configs/webpack.config.js --env=dev",
+    "stats": "webpack --config configs/webpack.config.js --env=stats --display-optimization-bailout",
     "prebuild": "rimraf dist",
-    "build": "webpack --env=prod",
+    "build": "webpack --config configs/webpack.config.js --env=prod",
     "preserver": "npm run build",
     "server": "BABEL_ENV=server babel src -d dist && nodemon dist/server.js"
   },
