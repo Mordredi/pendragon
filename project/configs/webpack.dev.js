@@ -19,7 +19,7 @@ module.exports = Merge(commonConfig, {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
   module: {
@@ -31,7 +31,7 @@ module.exports = Merge(commonConfig, {
         ],
         exclude: /node_modules/,
       }, {
-        test: /.(s?)css$/,
+        test: /.scss$/,
         use: ['style-loader', {
           loader: 'css-loader',
           options: {
@@ -45,7 +45,7 @@ module.exports = Merge(commonConfig, {
   devtool: 'inline-source-map',
   devServer: {
     hot: true,
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, '../dist'),
     publicPath: '/',
     historyApiFallback: true,
   },

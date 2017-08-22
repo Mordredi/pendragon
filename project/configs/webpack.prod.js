@@ -11,6 +11,8 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const config = require('../pendragonConfig');
+
 module.exports = Merge(commonConfig, {
   entry: {
     main: [
@@ -23,7 +25,7 @@ module.exports = Merge(commonConfig, {
   },
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
     sourceMapFilename: '[name].[chunkhash].map',
   },
@@ -37,9 +39,9 @@ module.exports = Merge(commonConfig, {
             forceEnv: 'production',
           },
         }],
-        exclude: /node_modules/, 
+        exclude: /node_modules/,
       }, {
-        test: /.(s?)css$/,
+        test: /.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [{
@@ -61,7 +63,7 @@ module.exports = Merge(commonConfig, {
       },
     }),
     new ManifestPlugin({
-      fileName: 'webpack-manifest.json', 
+      fileName: 'webpack-manifest.json',
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -71,7 +73,7 @@ module.exports = Merge(commonConfig, {
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/,
-      minRatio: 0.8,
+      minRatio: Infinity, 
     }),
     new ExtractTextPlugin('[name].[chunkhash].css'),
     new webpack.optimize.UglifyJsPlugin({
@@ -85,7 +87,13 @@ module.exports = Merge(commonConfig, {
       },
       comments: false
     }),
+    new WebpackPwaManifest(config.manifest),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new CopyWebpackPlugin([
+      {from: path.resolve(__dirname, '../server.key')},
+      {from: path.resolve(__dirname, '../server.crt')},
+    ]),
+
   ]
 });
 

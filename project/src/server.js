@@ -26,7 +26,6 @@ const handleRender = (req, res) => {
         <meta charset="utf-8">
         <title>Pendragon</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" media="all">
         <base href="/">
         <link rel="manifest" href="manifest.json">
         <meta name="mobile-web-app-capable" content="yes">
@@ -62,8 +61,6 @@ const handleRender = (req, res) => {
 
 const app = express();
 
-app.use('/', express.static(path.join(__dirname, '/')));
-
 app.get('*.js', (req, res, next) => {
   if (req.url === '/sw.js') {
     next();
@@ -81,6 +78,8 @@ app.get('*.css', (req, res, next) => {
   res.set('Content-Type', 'text/css');
   next();
 });
+
+app.use('/', express.static(path.join(__dirname, '/')));
 
 app.get('*', handleRender)
 

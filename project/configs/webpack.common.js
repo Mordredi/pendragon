@@ -41,7 +41,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, 'src/assets'),
+        from: path.resolve(__dirname, '../src/assets'),
         to: 'assets',
       },
     ]),

@@ -20,7 +20,8 @@
     "prebuild": "rimraf dist",
     "build": "webpack --config configs/webpack.config.js --env=prod",
     "preserver": "npm run build",
-    "server": "BABEL_ENV=server babel src -d dist && nodemon dist/server.js"
+    "server": "BABEL_ENV=server babel src -d dist && nodemon dist/server.js",
+    "ssl": "sh ssl.sh"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
